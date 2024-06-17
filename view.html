@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Image</title>
+<style>
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #090b729a;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.patient-image {
+  width: 300px;  /* Adjust width as desired */
+  height: auto;    /* Maintain aspect ratio */
+}
+button {
+  background-color: #04AA6D; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;  /* Green */
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+</style>
+
+</head>
+<body>
+  <!-- <h1>Patient Image</h1> -->
+  {% if patient_name %}
+    <img src="{{ url_for('static', filename='images/' + patient_name + '.jpg') }}" alt="Patient Image" style="width: 1300px; height: 600px">
+  {% else %}
+    <p>No patient name provided.</p>
+  {% endif %}
+  <a type="button" href="{{ url_for('index') }}">Back to Identification</a>
+  
+</body>
+</html>

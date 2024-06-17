@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Identification</title>
+<style>
+
+h1 {text-align: center;
+    color: rgb(250, 248, 248);}
+ /* Form with a speech bubble style */
+p{text-align: center;
+    color: rgb(250, 247, 247);}
+    a:link, a:visited {
+  background-color: #170c5881;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  
+}
+
+a:hover, a:active {
+  background-color: rgb(2, 2, 2);
+}
+input:hover, a:active {
+  background-color: rgb(10, 10, 10);
+}
+.button {
+  background-color: #04AA6D; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #090b729a;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+ form {
+      width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border-radius: 20px;
+      background-color: #070b4e98;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+      position: relative;  /* Necessary for speech bubble pseudo-element */
+    }
+
+    form:after {
+      content: "";
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 20px solid #fdfdfd;  /* Matches form background color */
+    }
+
+
+    /* Label styling */
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #f9faf9;
+    }
+
+    /* File input styling */
+    input[type="file"] {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    /* Button styling */
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;  /* Green */
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Display uploaded image below the form */
+    #uploaded-image {
+      display: block;
+      margin: 20px auto;
+      max-width: 100px;
+    }
+</style>
+
+</head>
+<body>
+    <body style="background-image: url('/static/images/blur.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center; height: 120vh;"></body>
+  <h1>(ETU) Patient Identification System</h1>
+  <form method="POST" enctype="multipart/form-data">
+    <label for="image">Upload Image:</label>
+    <input type="file" name="image" id="image" accept="image/*">
+    <br>
+    <label for="model_choice">Select Model:</label>
+    <br>
+    <input type="radio" id="eye" name="model_choice" value="1">
+    <label for="eye">Eye Identification</label>
+    <br>
+    <input type="radio" id="fingerprint" name="model_choice" value="2">
+    <label for="fingerprint">Fingerprint Identification</label>
+    <br>
+    <br>
+    <div class="w3-container">
+    <input type="submit" class="w3-btn w3-black" value="Identify Patient">
+    
+    
+    <a type="button"href="{{ url_for('view', patient_name=prediction) }}">View Profile</a>
+    {% if prediction %}
+    <p>Predicted Patient Name: {{ prediction }}</p>
+    </div>
+  </form>
+
+  
+
+    <!-- <form href="{{ url_for('view', patient_name=prediction) }}" method="POST">
+        <input type="submit" value="View Image"> -->
+
+      </form>
+  {% elif error %}
+    <p style="color: red;">Error: {{ error }}</p>
+  {% endif %}
+</body>
+</html>
